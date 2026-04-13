@@ -1,6 +1,10 @@
 import Hero from './_sections/Hero';
 import FeaturedProducts from './_sections/FeaturedProducts';
 import Categories from './_sections/Categories';
+import FlashSale from './_sections/FlashSale';
+import Testimonials from './_sections/Testimonials';
+import InstagramFeed from './_sections/InstagramFeed';
+import AboutBrand from './_sections/AboutBrand';
 
 export default function HomePage() {
   return (
@@ -8,6 +12,10 @@ export default function HomePage() {
       <Hero />
       <FeaturedProducts />
       <Categories />
+      <FlashSale />
+      <Testimonials />
+      <InstagramFeed />
+      <AboutBrand />
     </div>
   )
 }
