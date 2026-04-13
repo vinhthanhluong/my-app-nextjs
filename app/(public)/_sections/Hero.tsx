@@ -12,7 +12,7 @@ export default function Hero() {
             <span className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-red-500 uppercase bg-red-50 rounded-full">
               Sưu tập mới 2026
             </span>
-            <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-3xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
               Nâng tầm phong cách <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-red-500 to-pink-500">
                 Tối giản & Tinh tế
@@ -24,16 +24,14 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Button
-                size="lg"
-                className="px-8 py-6 bg-gray-900 border-black hover:bg-white hover:text-black text-white rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300"
+                className="px-8 py-6 bg-gray-900 text-white rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:bg-gradient-to-br hover:from-gray-900 hover:to-pink-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transform"
               >
                 Mua ngay
               </Button>
 
               <Button
                 variant="outline"
-                size="lg"
-                className="px-8 py-6 border-gray-400 text-gray-700 rounded-lg w-full sm:w-auto text-base font-medium hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+                className="px-8 py-6 border-2 border-gray-400 text-gray-700 rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:border-pink-500 hover:text-pink-500 hover:bg-pink-50 hover:scale-105 transform"
               >
                 Xem bộ sưu tập
               </Button>

@@ -32,8 +32,8 @@ export default function HeaderPage() {
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300 border-b",
         isScrolled
-          ? "bg-white/50 backdrop-blur-md py-3 shadow-sm"
-          : "bg-transparent border-transparent py-5"
+          ? "bg-white md:bg-white/50 backdrop-blur-md py-3 shadow-sm"
+          : "bg-transparent border-transparent py-3 md:py-5"
       )}
     >
       <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12 flex items-center justify-between">
@@ -43,7 +43,7 @@ export default function HeaderPage() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-3 text-sm lg:gap-8 lg:text-base">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -90,19 +90,19 @@ export default function HeaderPage() {
 
       {/* Mobile Navigation Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 animate-in fade-in slide-in-from-top-2">
-          <div className="flex flex-col p-6 gap-4">
+        <div className="md:hidden absolute top-full h-screen left-0 w-full bg-white border-b border-gray-100 animate-in fade-in slide-in-from-top-2">
+          <div className="flex flex-col p-6 gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium text-gray-900 py-2 border-b border-gray-50"
+                className="text-lg font-medium text-gray-900 py-2 border-b border-gray-100"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
-            <Button className="w-full bg-gray-900 mt-4">Mua sắm ngay</Button>
+            <Button className="w-full bg-gray-900 mt-4 py-6">Đăng nhập / Đăng ký</Button>
           </div>
         </div>
       )}
