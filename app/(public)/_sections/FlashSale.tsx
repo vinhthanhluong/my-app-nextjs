@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function FlashSale() {
   const time = [
@@ -47,7 +48,7 @@ export default function FlashSale() {
               <div >
                 <Button
                   size="lg"
-                  className="bg-gray-900 text-white hover:bg-gray-800 px-10 h-14 rounded-xl font-medium transition-all shadow-none"
+                  className="px-10 h-14 bg-gray-900 text-white rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:bg-gradient-to-br hover:from-gray-900 hover:to-pink-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transform"
                 >
                   Mua ngay với giá ưu đãi
                 </Button>
@@ -62,9 +63,11 @@ export default function FlashSale() {
 
             {/* Ảnh PNG Sản phẩm */}
             <div className="relative z-10 w-full h-full group">
-              <img
-                src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=764&auto=format&fit=crop"
+              <Image
+                src="/images/home/flashsale1.png"
                 alt="Product PNG"
+                width={764}
+                height={955}
                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 drop-shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
               />
             </div>

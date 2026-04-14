@@ -8,7 +8,7 @@ export default function AboutBrand() {
           {/* Ảnh nghệ thuật - Black & White hoặc Tông trầm */}
           <div className="flex-1 w-full aspect-[4/5] lg:aspect-square overflow-hidden rounded-[2rem]">
             <img
-              src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000&auto=format&fit=crop"
+              src="/images/home/about1.jpg"
               alt="Minimalist Design Philosophy"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
             />
@@ -17,7 +17,7 @@ export default function AboutBrand() {
           {/* Nội dung kể chuyện */}
           <div className="flex-1 space-y-8">
             <div className="inline-block px-4 py-1 border border-gray-200 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
-              The Tiny Philosophy
+              Về chúng tôi
             </div>
 
             <h2 className="text-4xl lg:text-6xl font-bold text-gray-900 tracking-tighter leading-tight">
@@ -34,7 +34,7 @@ export default function AboutBrand() {
             <div className="pt-4">
               <Button
                 variant="outline"
-                className="rounded-full px-8 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all"
+                className="rounded-full px-8 py-6 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all"
               >
                 Tìm hiểu câu chuyện của chúng tôi
               </Button>

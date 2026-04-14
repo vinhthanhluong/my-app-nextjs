@@ -1,7 +1,23 @@
+"use client";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
+
+  const heroImages = [
+    "/images/home/hero1.jpg",
+    "/images/home/hero2.jpg",
+    "/images/home/hero3.jpg",
+    "/images/home/hero4.jpg",
+  ];
+
   return (
     <section className="relative bg-white py-16 lg:py-24 overflow-hidden">
       <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12">
@@ -51,20 +67,56 @@ export default function Hero() {
           </div>
 
           {/* Cột Hình Ảnh */}
-          <div className="flex-1 relative w-full max-w-2xl">
-            <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[4/5] lg:aspect-square">
-              <div className="absolute inset-0 bg-gradient-to-tr from-gray-200 to-transparent"></div>
-              <Image
-                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
-                width={1000}
-                height={1000}
-                alt="Product Hero"
-                className="w-full h-full object-cover"
-              />
+          <div className="flex-1 relative w-full max-w-[450px] lg:max-w-[520px] xl:max-w-2xl group">
+            <div className="relative rounded-3xl overflow-hidden bg-gray-100 aspect-[4/5] lg:aspect-square shadow-2xl">
+              <Swiper
+                spaceBetween={0}
+                centeredSlides={true}
+                effect={'fade'}
+                loop={true}
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                  dynamicBullets: true,
+                }}
+                modules={[Autoplay, Pagination, EffectFade]}
+                className="mySwiper w-full h-full"
+              >
+                {heroImages.map((src, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="relative w-full h-full">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+                      <Image
+                        src={src}
+                        width={1000}
+                        height={1000}
+                        alt={`Hero Image ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        priority={index === 0} // Ưu tiên load ảnh đầu tiên
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              {/* Tùy chỉnh màu sắc dấu chấm Pagination bằng CSS thủ công hoặc Tailwind Global */}
+              <style jsx global>{`
+                .swiper-pagination-bullet-active {
+                  background: #ec4899 !important; /* Màu hồng pink-500 */
+                  width: 20px !important;
+                  border-radius: 5px !important;
+                }
+                .swiper-pagination-bullet {
+                  background: rgba(255, 255, 255, 0.8);
+                }
+              `}</style>
             </div>
 
             {/* Thẻ trôi nổi (Floating Card) */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-sm border border-gray-100 hidden md:block">
+            {/* <div className="absolute max-lg:-top-3 max-lg:-left-3 lg:-bottom-6 lg:-left-6 z-2 bg-white p-4 rounded-xl shadow-sm border border-gray-100 ">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
                   <span className="text-pink-600 font-bold">SALE</span>
@@ -74,7 +126,27 @@ export default function Hero() {
                   <p className="text-xs text-gray-500">Cho đơn hàng đầu tiên</p>
                 </div>
               </div>
+            </div> */}
+            <div className="absolute z-2 max-lg:-top-4 max-lg:-left-4 lg:-bottom-6 lg:-left-6 z-20 bg-white p-3.5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(236,72,153,0.15)] border border-pink-100 rounded-xl">
+              <div className="flex items-center gap-3">
+
+                {/* Icon SALE với màu sắc Pastel dịu nhẹ, nhỏ gọn hơn */}
+                <div className="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center border border-pink-200 shadow-md shadow-pink-100/50  transition-colors">
+                  <span className="text-pink-700 font-extrabold tracking-tight leading-none text-center">
+                    SALE<br /><span className="text-xs font-semibold">20%</span>
+                  </span>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-gray-950 transition-colors">Ưu đãi độc quyền</p>
+                  {/* Tag "Đơn hàng đầu tiên" gọn gàng hơn */}
+                  <span className="text-[11px] font-medium text-pink-600 bg-pink-50/70 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-pink-100/50">
+                    Cho đơn hàng đầu tiên
+                  </span>
+                </div>
+              </div>
             </div>
+
           </div>
 
         </div>

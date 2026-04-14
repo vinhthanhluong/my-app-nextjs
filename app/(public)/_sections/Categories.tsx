@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function Categories() {
   return (
@@ -10,7 +11,7 @@ export default function Categories() {
           {/* Cột trái - Banner lớn */}
           <div className="md:col-span-7 relative group overflow-hidden rounded-3xl bg-gray-100">
             <img
-              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop"
+              src="/images/home/categories1.jpg"
               alt="Lifestyle"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -21,7 +22,8 @@ export default function Categories() {
               <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-white mb-6">
                 Phong cách sống <br /> Tối giản hiện đại
               </h2>
-              <Button className="w-fit bg-white text-gray-900 hover:bg-gray-100 px-5 py-4 sm:px-8 sm:py-6 sm:rounded-lg font-bold">
+              <Button className="w-fit bg-white text-gray-900 px-5 py-4 sm:px-8 sm:py-6 sm:rounded-lg font-bold transition-all duration-300
+                hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white hover:border-transparent hover:scale-105 shadow-sm">
                 Khám phá ngay
               </Button>
             </div>
@@ -47,8 +49,10 @@ export default function Categories() {
                   </Button>
                 </div>
               </div>
-              <img
-                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500&auto=format&fit=crop"
+              <Image
+                src="/images/home/categories2.jpg"
+                width={500}
+                height={667}
                 alt="Accessories"
                 className="absolute right-0 bottom-0 w-1/2 h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
               />
@@ -80,7 +84,9 @@ export default function Categories() {
 
                 <Button
                   variant="outline"
-                  className="w-fit bg-white/5 border-white/10 text-white backdrop-blur-md hover:bg-white hover:text-black transition-all duration-300 rounded-xl px-6"
+                  className="w-fit bg-white/5 border-white/10 text-white backdrop-blur-md transition-all duration-300 rounded-xl px-6 py-6
+             hover:bg-pink-500 hover:text-white hover:shadow-[0_0_30px_10px_rgba(236,72,153,0.4)]
+             hover:scale-105 active:scale-95"
                 >
                   Mua bộ sưu tập
                 </Button>

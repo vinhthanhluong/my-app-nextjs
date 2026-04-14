@@ -1,106 +1,133 @@
+"use client";
+
+import React from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, ShieldCheck, Truck } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { ShoppingBag, ArrowRight, Heart } from "lucide-react";
+
+const products = {
+  trending: [
+    { id: 1, name: "Tiny Card Platinum", price: "299.000đ", image: "https://images.unsplash.com/photo-1613243555988-441166d4d6fd?q=80&w=500", tag: "Hot" },
+    { id: 2, name: "Leather Wallet Case", price: "550.000đ", image: "https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500", tag: "New" },
+    { id: 3, name: "Minimalist Key Tag", price: "150.000đ", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500", tag: "Best" },
+    { id: 4, name: "Signature Pen", price: "450.000đ", image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=500", tag: "New" },
+    { id: 5, name: "Signature Pen", price: "450.000đ", image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=500", tag: "New" },
+    { id: 6, name: "Signature Pen", price: "450.000đ", image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=500", tag: "New" },
+    { id: 7, name: "Signature Pen", price: "450.000đ", image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?q=80&w=500", tag: "New" },
+  ],
+  new: [
+    { id: 5, name: "Tiny Card Red Edition", price: "320.000đ", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500", tag: "New" },
+    { id: 6, name: "Carbon Card Holder", price: "890.000đ", image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=500", tag: "-20%" },
+  ]
+};
 
 export default function FeaturedProducts() {
-  const products = [
-    {
-      id: 1,
-      name: "Minimalist Watch v1",
-      price: "1.200.000đ",
-      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop",
-      tag: "Bán chạy"
-    },
-    {
-      id: 2,
-      name: "Essential Tote Bag",
-      price: "450.000đ",
-      image: "https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=500&auto=format&fit=crop",
-      tag: "Mới về"
-    },
-    {
-      id: 3,
-      name: "Signature Wallet",
-      price: "350.000đ",
-      image: "https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500&auto=format&fit=crop",
-      tag: "-10%"
-    }
-  ];
-
   return (
-    <section className="bg-white py-20 border-t border-gray-100">
-      <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12">
+    <section className="bg-white py-24 overflow-hidden">
+      <div className="max-w-[1536px] mx-auto px-6 lg:px-12">
 
-        {/* Phần Lợi ích (Benefits) - Giúp khách hàng tin tưởng ngay */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 ">
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-red-50 rounded-lg">
-              <Truck className="w-6 h-6 text-red-500" />
-            </div>
+        <Tabs defaultValue="trending" className="w-full">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-8">
             <div>
-              <h3 className="font-bold text-gray-900">Giao hàng nhanh</h3>
-              <p className="text-sm text-gray-500">Miễn phí cho đơn từ 500k</p>
+              <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Sản phẩm tiêu biểu</h2>
+              <p className="text-gray-500 italic">Được tinh tuyển cho phong cách của bạn.</p>
             </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-red-50 rounded-lg">
-              <ShieldCheck className="w-6 h-6 text-red-500" />
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900">Bảo hành 12 tháng</h3>
-              <p className="text-sm text-gray-500">Cam kết chất lượng chuẩn "Tiny"</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-red-50 rounded-lg">
-              <Star className="w-6 h-6 text-red-500" />
-            </div>
-            <div>
-              <h3 className="font-bold text-gray-900">Đổi trả 7 ngày</h3>
-              <p className="text-sm text-gray-500">Thủ tục đơn giản, nhanh chóng</p>
-            </div>
-          </div>
-        </div>
 
-        {/* Phần Sản phẩm tiêu biểu */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-3 sm:mb-12 gap-4 sm:gap-6">
-          <div className="max-w-xl">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Sản phẩm nổi bật</h2>
-            <p className="text-gray-600">Những thiết kế được yêu thích nhất trong bộ sưu tập "Tiny Red" tháng này.</p>
+            <TabsList className="bg-gray-50 p-1 rounded-full border border-gray-100">
+              <TabsTrigger value="trending" className="rounded-full px-8 py-2 data-[state=active]:bg-white data-[state=active]:shadow-sm">Xu hướng</TabsTrigger>
+              <TabsTrigger value="new" className="rounded-full px-8 py-2 data-[state=active]:bg-white data-[state=active]:shadow-sm">Mới về</TabsTrigger>
+            </TabsList>
           </div>
-          <Button variant="ghost" className="text-red-500 hover:text-red-600 p-0 hover:bg-transparent font-semibold">
-            Xem tất cả sản phẩm <ArrowRight className="ml-2 w-4 h-4" />
+
+          <TabsContent value="trending" className="mt-0 outline-none">
+            <ProductSlider data={products.trending} />
+          </TabsContent>
+          <TabsContent value="new" className="mt-0 outline-none">
+            <ProductSlider data={products.new} />
+          </TabsContent>
+        </Tabs>
+
+        <div className="mt-16 text-center">
+          <Button variant="outline" className="rounded-full border-gray-200 px-10 py-6 hover:bg-gray-900 hover:text-white transition-all duration-500">
+            Khám phá toàn bộ cửa hàng <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
-
-        {/* Grid Sản phẩm */}
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 sm:gap-10">
-          {products.map((product) => (
-            <div key={product.id} className="group cursor-pointer">
-              <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-lg sm:rounded-2xl mb-3 sm:mb-6">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <span className="absolute top-4 left-4 px-3 py-1 bg-white text-[10px] font-bold uppercase tracking-widest text-gray-900 rounded-full shadow-sm">
-                  {product.tag}
-                </span>
-                <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <Button className="w-full bg-gray-900 text-white shadow-xl py-3 rounded-md font-semibold transition-all duration-300 hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-600 hover:shadow-[0_10px_20px_-5px_rgba(236,72,153,0.5)] active:scale-95">
-                    Thêm vào giỏ hàng
-                  </Button>
-                </div>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">{product.name}</h3>
-              <p className="text-gray-500 font-medium">{product.price}</p>
-            </div>
-          ))}
-        </div>
-
       </div>
     </section>
   );
-};
+}
+
+function ProductSlider({ data }: { data: any[] }) {
+  return (
+    <Carousel
+      opts={{ align: "start", loop: true }}
+      className="w-full relative"
+    >
+      <CarouselContent className="-ml-4">
+        {data.map((product) => (
+          <CarouselItem key={product.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+            <div className="group relative bg-gray-50 rounded-[2rem] p-4 transition-all duration-500 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-transparent hover:border-gray-100">
+              {/* Image Container */}
+              <div className="relative aspect-square rounded-[1.5rem] overflow-hidden bg-white">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+
+                {/* Floating Tags */}
+                <div className="absolute top-4 left-4 flex flex-col gap-2">
+                  <Badge className="bg-white/90 backdrop-blur-md text-gray-900 hover:bg-white border-none shadow-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest">
+                    {product.tag}
+                  </Badge>
+                </div>
+
+                <button className="absolute top-4 right-4 p-2.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm text-gray-400 hover:text-red-500 transition-colors">
+                  <Heart className="w-4 h-4" fill="currentColor" fillOpacity={0} />
+                </button>
+
+                {/* Quick Add Button */}
+                <div className="absolute inset-x-4 bottom-4 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <Button className="w-full bg-gray-900 text-white rounded-xl py-6 shadow-xl hover:bg-red-500 transition-colors">
+                    <ShoppingBag className="w-4 h-4 mr-2" /> Thêm nhanh
+                  </Button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="mt-6 px-2 pb-2">
+                <div className="flex justify-between items-start mb-1">
+                  <h3 className="text-lg font-bold text-gray-900 line-clamp-1">{product.name}</h3>
+                </div>
+                <p className="text-gray-500 text-sm mb-4">Màu sắc đặc trưng • 2026</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-xl font-black text-gray-900 tracking-tight">{product.price}</span>
+                  <div className="flex gap-1">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-gray-200"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+
+      {/* Nút điều hướng tinh chỉnh lại vị trí */}
+      <div className="hidden lg:block">
+        <CarouselPrevious className="-left-6 h-12 w-12 border-gray-100 shadow-sm" />
+        <CarouselNext className="-right-6 h-12 w-12 border-gray-100 shadow-sm" />
+      </div>
+    </Carousel>
+  );
+}
