@@ -19,7 +19,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative bg-white py-16 lg:py-24 overflow-hidden">
+    <section className="relative bg-white pb-16 lg:pb-24 overflow-hidden">
       <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center gap-12">
 

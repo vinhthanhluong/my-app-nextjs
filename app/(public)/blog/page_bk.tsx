@@ -90,18 +90,6 @@ const ALL_POSTS = [
       "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop",
     featured: false,
   },
-  {
-    id: 8,
-    category: "Thiết kế",
-    title: "Tesst",
-    excerpt:
-      "Khi loại bỏ mọi yếu tố trang trí, chữ viết trở thành nhân vật chính. Chúng tôi chia sẻ cách chọn font chữ để nói nhiều bằng ít ký tự nhất.",
-    date: "02 Tháng 3, 2026",
-    readTime: "6 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-  },
 ];
 
 const CATEGORIES = ["Tất cả", "Thiết kế", "Lối sống", "Cửa hàng"];
@@ -207,7 +195,8 @@ export default function BlogArchivePage() {
   const featured = ALL_POSTS.find((p) => p.featured);
 
   const filtered = ALL_POSTS.filter((post) => {
-    const matchCat = activeCategory === "Tất cả" || post.category === activeCategory;
+    const matchCat =
+      activeCategory === "Tất cả" || post.category === activeCategory;
     const matchSearch =
       searchQuery === "" ||
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -222,25 +211,25 @@ export default function BlogArchivePage() {
       : filtered;
 
   const totalPages = Math.ceil(gridPosts.length / POSTS_PER_PAGE);
-  // const paginated = gridPosts.slice(
-  //   (currentPage - 1) * POSTS_PER_PAGE,
-  //   currentPage * POSTS_PER_PAGE
-  // );
+  const paginated = gridPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
 
-  // const handleCategoryChange = (cat) => {
-  //   setActiveCategory(cat);
-  //   setCurrentPage(1);
-  // };
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    setCurrentPage(1);
+  };
 
-  // const handleSearch = (e) => {
-  //   setSearchQuery(e.target.value);
-  //   setCurrentPage(1);
-  // };
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="bg-white min-h-screen">
       {/* ── Page Header ─────────────────────────────────────── */}
-      <div className="border-b border-gray-100">
+      <header className="border-b border-gray-100">
         <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12 py-16 lg:py-24">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
             <div>
@@ -264,8 +253,8 @@ export default function BlogArchivePage() {
               <input
                 type="text"
                 placeholder="Tìm kiếm bài viết..."
-                // value={searchQuery}
-                // onChange={handleSearch}
+                value={searchQuery}
+                onChange={handleSearch}
                 className="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none focus:border-red-300 focus:ring-2 focus:ring-red-50 transition-all bg-gray-50"
               />
             </div>
@@ -276,10 +265,10 @@ export default function BlogArchivePage() {
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                // onClick={() => handleCategoryChange(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border border-gray-200 ${activeCategory === cat
-                  ? "bg-gray-900 border-gray-900 text-white"
-                  : "bg-transparent text-gray-600 hover:border-gray-400 hover:text-gray-900"
+                onClick={() => handleCategoryChange(cat)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${activeCategory === cat
+                  ? "bg-gray-900 text-white"
+                  : "bg-transparent border border-gray-200 text-gray-600 hover:border-gray-400 hover:text-gray-900"
                   }`}
               >
                 {cat}
@@ -290,20 +279,19 @@ export default function BlogArchivePage() {
             </span>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* ── Content ─────────────────────────────────────────── */}
-      <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12 py-16 lg:py-24">
+      <main className="max-w-[1536px] w-full mx-auto px-6 lg:px-12 py-16 lg:py-24">
         {/* Featured Post — only show on default view */}
-        {/* {activeCategory === "Tất cả" && searchQuery === "" && featured && (
+        {activeCategory === "Tất cả" && searchQuery === "" && featured && (
           <FeaturedPost post={featured} />
-        )} */}
-        <FeaturedPost post={featured} />
+        )}
 
         {/* Grid */}
-        {ALL_POSTS.length > 0 ? (
+        {paginated.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {ALL_POSTS.map((post) => (
+            {paginated.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
@@ -315,38 +303,39 @@ export default function BlogArchivePage() {
         )}
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-3 mt-20">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={true}
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-3 mt-20">
             <button
-              key={n}
-              onClick={() => setCurrentPage(n)}
-              className={`w-10 h-10 rounded-full text-sm font-semibold transition-all duration-200 ${currentPage === n
-                ? "bg-gray-900 text-white"
-                : "border border-gray-200 text-gray-600 hover:border-gray-400"
-                }`}
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             >
-              {n}
+              <ChevronLeft className="w-4 h-4" />
             </button>
-          ))}
 
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+              <button
+                key={n}
+                onClick={() => setCurrentPage(n)}
+                className={`w-10 h-10 rounded-full text-sm font-semibold transition-all duration-200 ${currentPage === n
+                  ? "bg-gray-900 text-white"
+                  : "border border-gray-200 text-gray-600 hover:border-gray-400"
+                  }`}
+              >
+                {n}
+              </button>
+            ))}
 
-      </div>
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+      </main>
     </div>
   );
 }

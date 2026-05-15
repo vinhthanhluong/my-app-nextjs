@@ -9,7 +9,7 @@ import BlogNews from './_sections/BlogNews';
 
 export default function HomePage() {
   return (
-    <div>
+    <>
       <Hero />
       <FeaturedProducts />
       <Categories />
@@ -18,6 +18,6 @@ export default function HomePage() {
       <InstagramFeed />
       <AboutBrand />
       <BlogNews />
-    </div>
+    </>
   )
 }

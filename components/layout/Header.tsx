@@ -22,7 +22,7 @@ export default function HeaderPage() {
   const navLinks = [
     { name: "Trang chủ", href: "/" },
     { name: "Sản phẩm", href: "/products" },
-    { name: "Bộ sưu tập", href: "/collections" },
+    // { name: "Bộ sưu tập", href: "/collections" },
     { name: "Về chúng tôi", href: "/about" },
     { name: "Blog", href: "/blog" },
   ]
