@@ -119,7 +119,7 @@ function ProductCard({ product }) {
   const [fav, setFav] = useState(product.isFavorite);
 
   return (
-    <div className="group relative bg-gray-50 rounded-[2rem] p-4 transition-all duration-500 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-transparent hover:border-gray-100">
+    <div className="group relative bg-gray-50 rounded-[2rem] p-4 transition-all duration-500 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-transparent hover:border-gray-100">
       {/* Image Container */}
       <div className="relative aspect-square rounded-[1.5rem] overflow-hidden bg-white">
         <Image

@@ -30,7 +30,7 @@ export default function Hero() {
             </span>
             <h1 className="text-3xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 leading-tight mb-6">
               Nâng tầm phong cách <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-red-500 to-pink-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r dark:from-red-500 to-red-500">
                 Tối giản & Tinh tế
               </span>
             </h1>
@@ -40,14 +40,14 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Button
-                className="px-8 py-6 bg-gray-900 text-white rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:bg-gradient-to-br hover:from-gray-900 hover:to-pink-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transform"
+                className="px-8 py-6 bg-gray-900 text-white rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:bg-gradient-to-br hover:from-gray-900 hover:to-red-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transform"
               >
                 Mua ngay
               </Button>
 
               <Button
                 variant="outline"
-                className="px-8 py-6 border-2 border-gray-400 text-gray-700 rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:border-pink-500 hover:text-pink-500 hover:bg-pink-50 hover:scale-105 transform"
+                className="px-8 py-6 border-2 border-gray-400 text-gray-700 rounded-lg w-full sm:w-auto text-base font-medium transition-all duration-300 hover:border-red-500 hover:text-red-500 hover:bg-red-50 hover:scale-105 transform"
               >
                 Xem bộ sưu tập
               </Button>
@@ -55,12 +55,12 @@ export default function Hero() {
 
             <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 border-t border-gray-100 pt-8">
               <div>
-                <p className="text-2xl font-bold text-gray-900">10k+</p>
+                <p className="text-2xl font-bold text-red-400">10k+</p>
                 <p className="text-sm text-gray-500">Khách hàng</p>
               </div>
               <div className="h-10 w-px bg-gray-200"></div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">4.9/5</p>
+                <p className="text-2xl font-bold text-red-400">4.9/5</p>
                 <p className="text-sm text-gray-500">Đánh giá</p>
               </div>
             </div>
@@ -131,8 +131,8 @@ export default function Hero() {
               <div className="flex items-center gap-3">
 
                 {/* Icon SALE với màu sắc Pastel dịu nhẹ, nhỏ gọn hơn */}
-                <div className="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center border border-pink-200 shadow-md shadow-pink-100/50  transition-colors">
-                  <span className="text-pink-700 font-extrabold tracking-tight leading-none text-center">
+                <div className="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center border border-red-200 shadow-md shadow-red-100/50  transition-colors">
+                  <span className="text-red-600 font-extrabold tracking-tight leading-none text-center">
                     SALE<br /><span className="text-xs font-semibold">20%</span>
                   </span>
                 </div>
@@ -140,7 +140,7 @@ export default function Hero() {
                 <div>
                   <p className="text-sm font-semibold text-gray-950 transition-colors">Ưu đãi độc quyền</p>
                   {/* Tag "Đơn hàng đầu tiên" gọn gàng hơn */}
-                  <span className="text-[11px] font-medium text-pink-600 bg-pink-50/70 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-pink-100/50">
+                  <span className="text-[11px] font-medium text-red-600 bg-red-50/70 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-red-100/50">
                     Cho đơn hàng đầu tiên
                   </span>
                 </div>
