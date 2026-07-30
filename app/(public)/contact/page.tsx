@@ -486,11 +486,11 @@ export default function ContactPage() {
             Chúng tôi luôn tìm kiếm những cộng sự chia sẻ triết học tối giản. Hãy giới thiệu bản thân — chúng tôi sẽ đọc từng email.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button className="bg-red-500 hover:bg-red-600 text-white rounded-full px-10 py-6 font-bold shadow-xl shadow-red-900/30 transition-all">
+            <Button className="bg-red-500 hover:bg-red-800 text-white rounded-full px-10 py-6 font-bold shadow-xl shadow-red-900/30 transition-all">
               Gửi hồ sơ hợp tác
               <ArrowUpRight className="ml-2 w-4 h-4" />
             </Button>
-            <Button variant="outline" className="border-white/20 text-black hover:bg-white/10 rounded-full px-10 py-6 font-bold transition-all">
+            <Button variant="outline" className="border-white/20 text-black hover:bg-white/10 hover:text-white rounded-full px-10 py-6 font-bold transition-all">
               Xem sản phẩm của chúng tôi
             </Button>
           </div>
