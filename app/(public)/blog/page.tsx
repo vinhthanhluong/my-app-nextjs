@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Search, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -104,6 +103,7 @@ const ALL_POSTS = [
   },
 ];
 
+// const CATEGORIES = ["Tất cả", "Thiết kế", "Lối sống", "Cửa hàng"];
 const CATEGORIES = ["Tất cả", "Thiết kế", "Lối sống", "Cửa hàng"];
 const POSTS_PER_PAGE = 6;
 
@@ -237,6 +237,47 @@ export default function BlogArchivePage() {
   //   setCurrentPage(1);
   // };
 
+  // API CATEGORY
+  // const handlefetchCategory = async () => {
+  //   let dataCate = [];
+  //   try {
+  //     const res = await fetch(`https://tinycard.infinityfree.me/wp//wp-json/wp/v2/blog-category`);
+  //     dataCate = await res.json();
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   } catch (error: any) {
+  //     return (
+  //       <div className="text-red-500">{error?.message || "Đã xảy ra lỗi!!"}</div>
+  //     );
+  //   }
+
+  //   return dataCate;
+  // }
+  // const dataCate = handlefetchCategory();
+  // console.log(dataCate)
+
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        // Note: Cleaned up the double slash 'wp//wp-json' to 'wp/wp-json'
+        // const res = await fetch(`https://tinycard.infinityfree.me/wp/wp-json/wp/v2/blog-category`);
+        const res = await fetch("/api/blog-category");
+        console.log(res);
+        if (!res.ok) throw new Error('Failed to fetch data');
+
+        const data = await res.json();
+        setCategories(data);
+      } catch (err: any) {
+        setError(err.message);
+      }
+    };
+
+    fetchCategories();
+  }, []); // Empty dependency array ensures this runs once on mount
+  console.log('categories', categories)
+  if (error) return <div className="text-red-500">{error}</div>;
+
   return (
     <div className="bg-white min-h-screen">
       {/* ── Page Header ─────────────────────────────────────── */}
@@ -302,7 +343,7 @@ export default function BlogArchivePage() {
 
         {/* Grid */}
         {ALL_POSTS.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-12">
             {ALL_POSTS.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
