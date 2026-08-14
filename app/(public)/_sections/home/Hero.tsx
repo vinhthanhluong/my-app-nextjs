@@ -114,41 +114,7 @@ export default function Hero() {
                 }
               `}</style>
             </div>
-
-            {/* Thẻ trôi nổi (Floating Card) */}
-            {/* <div className="absolute max-lg:-top-3 max-lg:-left-3 lg:-bottom-6 lg:-left-6 z-2 bg-white p-4 rounded-xl shadow-sm border border-gray-100 ">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-                  <span className="text-pink-600 font-bold">SALE</span>
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">Giảm giá 20%</p>
-                  <p className="text-xs text-gray-500">Cho đơn hàng đầu tiên</p>
-                </div>
-              </div>
-            </div> */}
-            <div className="absolute z-2 max-lg:-top-4 max-lg:-left-4 lg:-bottom-6 lg:-left-6 z-20 bg-white p-3.5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(236,72,153,0.15)] border border-pink-100 rounded-xl">
-              <div className="flex items-center gap-3">
-
-                {/* Icon SALE với màu sắc Pastel dịu nhẹ, nhỏ gọn hơn */}
-                <div className="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center border border-red-200 shadow-md shadow-red-100/50  transition-colors">
-                  <span className="text-red-600 font-extrabold tracking-tight leading-none text-center">
-                    SALE<br /><span className="text-xs font-semibold">20%</span>
-                  </span>
-                </div>
-
-                <div>
-                  <p className="text-sm font-semibold text-gray-950 transition-colors">Ưu đãi độc quyền</p>
-                  {/* Tag "Đơn hàng đầu tiên" gọn gàng hơn */}
-                  <span className="text-[11px] font-medium text-red-600 bg-red-50/70 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-red-100/50">
-                    Cho đơn hàng đầu tiên
-                  </span>
-                </div>
-              </div>
-            </div>
-
           </div>
-
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-type ProductItem = {
+interface ProductItem {
   id: number,
   name: string,
   price: string,

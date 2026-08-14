@@ -104,7 +104,6 @@ const ALL_POSTS = [
 ];
 
 // const CATEGORIES = ["Tất cả", "Thiết kế", "Lối sống", "Cửa hàng"];
-const CATEGORIES = ["Tất cả", "Thiết kế", "Lối sống", "Cửa hàng"];
 const POSTS_PER_PAGE = 6;
 
 // ─── Subcomponents ──────────────────────────────────────────────────────────
@@ -200,7 +199,7 @@ function PostCard({ post }) {
 
 // ─── Main Page ───────────────────────────────────────────────────────────────
 export default function BlogArchivePage() {
-  const [activeCategory, setActiveCategory] = useState("Tất cả");
+  const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -217,7 +216,7 @@ export default function BlogArchivePage() {
 
   // Exclude featured from grid only when showing "Tất cả" and no search
   const gridPosts =
-    activeCategory === "Tất cả" && searchQuery === ""
+    activeCategory === "all" && searchQuery === ""
       ? filtered.filter((p) => !p.featured)
       : filtered;
 
@@ -227,56 +226,37 @@ export default function BlogArchivePage() {
   //   currentPage * POSTS_PER_PAGE
   // );
 
-  // const handleCategoryChange = (cat) => {
-  //   setActiveCategory(cat);
-  //   setCurrentPage(1);
-  // };
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    setCurrentPage(1);
+  };
 
   // const handleSearch = (e) => {
   //   setSearchQuery(e.target.value);
   //   setCurrentPage(1);
   // };
 
-  // API CATEGORY
-  // const handlefetchCategory = async () => {
-  //   let dataCate = [];
-  //   try {
-  //     const res = await fetch(`https://tinycard.infinityfree.me/wp//wp-json/wp/v2/blog-category`);
-  //     dataCate = await res.json();
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   } catch (error: any) {
-  //     return (
-  //       <div className="text-red-500">{error?.message || "Đã xảy ra lỗi!!"}</div>
-  //     );
-  //   }
-
-  //   return dataCate;
-  // }
-  // const dataCate = handlefetchCategory();
-  // console.log(dataCate)
-
-  const [categories, setCategories] = useState([]);
-  const [error, setError] = useState(null);
+  // API BLOG CAT
+  const [dataBlogcat, setDataBlogcat] = useState([]);
   useEffect(() => {
-    const fetchCategories = async () => {
+    const handlefetchCategoryBlog = async () => {
       try {
-        // Note: Cleaned up the double slash 'wp//wp-json' to 'wp/wp-json'
-        // const res = await fetch(`https://tinycard.infinityfree.me/wp/wp-json/wp/v2/blog-category`);
-        const res = await fetch("/api/blog-category");
-        console.log(res);
-        if (!res.ok) throw new Error('Failed to fetch data');
+        const resBlogcat = await fetch("/api/blogcat");
+        const text = await resBlogcat.text();
 
-        const data = await res.json();
-        setCategories(data);
-      } catch (err: any) {
-        setError(err.message);
+        if (!resBlogcat.ok) {
+          throw new Error(`API lỗi ${resBlogcat.status}: ${text}`);
+        }
+
+        const data = JSON.parse(text);
+        setDataBlogcat(data);
+      } catch (error) {
+        console.error("Blogcat error:", error);
       }
     };
 
-    fetchCategories();
-  }, []); // Empty dependency array ensures this runs once on mount
-  console.log('categories', categories)
-  if (error) return <div className="text-red-500">{error}</div>;
+    handlefetchCategoryBlog();
+  }, []);
 
   return (
     <div className="bg-white min-h-screen">
@@ -314,16 +294,28 @@ export default function BlogArchivePage() {
 
           {/* Category Filter */}
           <div className="flex items-center gap-2 mt-10 flex-wrap">
-            {CATEGORIES.map((cat) => (
+            {/* ALL */}
+            <button
+              key="all"
+              onClick={() => handleCategoryChange("all")}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border ${activeCategory === "all"
+                ? "bg-gray-900 border-gray-900 text-white"
+                : "bg-transparent border-gray-200 text-gray-600 hover:border-gray-400 hover:text-gray-900 cursor-pointer"
+                }`}
+            >
+              Tất cả
+            </button>
+            {/* Categories */}
+            {dataBlogcat.map((cat: { id: string, name: string }) => (
               <button
-                key={cat}
-                // onClick={() => handleCategoryChange(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border border-gray-200 ${activeCategory === cat
+                key={cat.id}
+                onClick={() => handleCategoryChange(cat.id)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 border border-gray-200 ${activeCategory === cat.id
                   ? "bg-gray-900 border-gray-900 text-white"
-                  : "bg-transparent text-gray-600 hover:border-gray-400 hover:text-gray-900"
+                  : "bg-transparent text-gray-600 hover:border-gray-400 hover:text-gray-900 cursor-pointer"
                   }`}
               >
-                {cat}
+                {cat.name}
               </button>
             ))}
             <span className="ml-auto text-sm text-gray-400">
@@ -336,10 +328,10 @@ export default function BlogArchivePage() {
       {/* ── Content ─────────────────────────────────────────── */}
       <div className="max-w-[1536px] w-full mx-auto px-6 lg:px-12 py-16 lg:py-24">
         {/* Featured Post — only show on default view */}
-        {/* {activeCategory === "Tất cả" && searchQuery === "" && featured && (
+        {activeCategory === "all" && searchQuery === "" && featured && (
           <FeaturedPost post={featured} />
-        )} */}
-        <FeaturedPost post={featured} />
+        )}
+        {/* <FeaturedPost post={featured} /> */}
 
         {/* Grid */}
         {ALL_POSTS.length > 0 ? (
