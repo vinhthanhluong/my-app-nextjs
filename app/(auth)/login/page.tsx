@@ -13,7 +13,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [focused, setFocused] = useState("");
 
-  const handleSubmit = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => setLoading(false), 2000);

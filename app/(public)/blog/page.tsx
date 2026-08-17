@@ -444,7 +444,8 @@ const ALL_POSTS: BlogItem[] = [
 const POSTS_PER_PAGE = 6;
 
 // ─── Subcomponents ──────────────────────────────────────────────────────────
-function FeaturedPost({ post }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function FeaturedPost({ post }: { post: any }) {
   return (
     <article className="group cursor-pointer grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 pb-20 border-b border-gray-100">
       {/* Image */}
@@ -541,9 +542,9 @@ export default function BlogArchivePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const featured = ALL_POSTS.find((p) => p.featured);
+  const featured = ALL_POSTS.find((p: any) => p.featured);
 
-  const filtered = ALL_POSTS.filter((post) => {
+  const filtered = ALL_POSTS.filter((post: any) => {
     const matchCat = activeCategory === "Tất cả" || post.category === activeCategory;
     const matchSearch =
       searchQuery === "" ||
@@ -555,7 +556,7 @@ export default function BlogArchivePage() {
   // Exclude featured from grid only when showing "Tất cả" and no search
   const gridPosts =
     activeCategory === "all" && searchQuery === ""
-      ? filtered.filter((p) => !p.featured)
+      ? filtered.filter((p: any) => !p.featured)
       : filtered;
 
   const totalPages = Math.ceil(gridPosts.length / POSTS_PER_PAGE);
@@ -695,7 +696,7 @@ export default function BlogArchivePage() {
         {/* Grid */}
         {dataBlog.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-12">
-            {dataBlog.map((post) => (
+            {dataBlog.map((post: BlogItem) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>

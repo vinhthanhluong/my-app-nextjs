@@ -88,7 +88,7 @@ const RELATED = [
 ];
 
 // ─── Related Card ──────────────────────────────────────────────────────────────
-function RelatedCard({ product }) {
+function RelatedCard({ product }: { product: any }) {
   const [fav, setFav] = useState(false);
   return (
     <div className="group relative bg-gray-50 rounded-[2rem] p-4 transition-all duration-500 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-transparent hover:border-gray-100">
@@ -114,7 +114,7 @@ function RelatedCard({ product }) {
         <div className="flex items-center justify-between">
           <span className="text-xl font-black text-gray-900 tracking-tight">{product.price}</span>
           <div className="flex gap-1">
-            {product.colors.map((c, i) => (
+            {product.colors.map((c: string, i: number) => (
               <div key={i} className="w-3 h-3 rounded-full border border-white shadow-sm" style={{ backgroundColor: c }} />
             ))}
           </div>
@@ -125,7 +125,7 @@ function RelatedCard({ product }) {
 }
 
 // ─── Accordion ─────────────────────────────────────────────────────────────────
-function Accordion({ label, children }) {
+function Accordion({ label, children }: { label: string, children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-gray-100">

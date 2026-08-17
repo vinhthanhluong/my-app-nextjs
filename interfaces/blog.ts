@@ -16,8 +16,8 @@ export interface BlogItem {
   blogcat: number[];
   class_list: unknown[];
   acf: unknown[];
-  _links: BlogItemLinks;
-  _embedded: Embedded;
+  _links?: BlogItemLinks;
+  _embedded?: Embedded;
 }
 
 export interface GUID {
@@ -25,13 +25,7 @@ export interface GUID {
   protected?: boolean;
 }
 
-export interface BlogItemLinks {
-  self: Self[];
-  collection: Collection[];
-  about: About[];
-  "wp:post_type": WpPostType[];
-  curies: Curie[];
-}
+// BlogItemLinks is defined below (line ~181) — single definition to avoid merge conflicts
 export interface Content {
   rendered: string;
   protected: boolean;
@@ -61,8 +55,8 @@ export interface WpPostType {
 
 //////////////////////// _embedded
 export interface Embedded {
-  "wp:featuredmedia": WpFeaturedmedia[];
-  "wp:term": Array<EmbeddedWpTerm[]>;
+  "wp:featuredmedia"?: WpFeaturedmedia[];
+  "wp:term"?: Array<EmbeddedWpTerm[]>;
 }
 
 export interface WpFeaturedmedia {
@@ -182,11 +176,12 @@ export interface BlogItemLinks {
   self: Self[];
   collection: About[];
   about: About[];
-  "version-history": VersionHistory[];
-  "predecessor-version": PredecessorVersion[];
-  "wp:featuredmedia": AuthorElement[];
-  "wp:attachment": About[];
-  "wp:term": LinksWpTerm[];
+  "version-history"?: VersionHistory[];
+  "predecessor-version"?: PredecessorVersion[];
+  "wp:featuredmedia"?: AuthorElement[];
+  "wp:post_type"?: WpPostType[] | About[];
+  "wp:attachment"?: About[];
+  "wp:term"?: LinksWpTerm[];
   curies: Cury[];
 }
 

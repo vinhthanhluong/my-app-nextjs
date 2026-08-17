@@ -110,10 +110,11 @@ const RELATED = [
 ];
 
 // ─── Content renderer ─────────────────────────────────────────────────────
-function RenderContent({ blocks }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function RenderContent({ blocks }: { blocks: any }) {
   return (
     <div className="space-y-7">
-      {blocks.map((block, i) => {
+      {blocks.map((block: any, i: number) => {
         if (block.type === "paragraph") {
           return (
             <p key={i} className="text-gray-600 leading-[1.9] text-[17px]">
@@ -169,7 +170,7 @@ function RenderContent({ blocks }) {
         if (block.type === "list") {
           return (
             <ul key={i} className="space-y-4">
-              {block.items.map((item, j) => (
+              {block.items.map((item: string, j: number) => (
                 <li key={j} className="flex items-start gap-4 text-gray-600 text-[17px] leading-[1.8]">
                   <span className="flex-shrink-0 w-5 h-5 mt-[3px] rounded-full bg-red-500/10 flex items-center justify-center">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>

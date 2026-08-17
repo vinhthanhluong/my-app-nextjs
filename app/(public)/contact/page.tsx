@@ -106,7 +106,7 @@ const FAQS = [
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
-function FormInput({ id, label, type = "text", value, onChange, placeholder, required }) {
+function FormInput({ id, label, type = "text", value, onChange, placeholder, required }: { id: string, label?: string, type?: string, value: string, onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void, placeholder: string, required: boolean }) {
   const [focused, setFocused] = useState(false);
   return (
     <div className="space-y-2">
@@ -128,7 +128,7 @@ function FormInput({ id, label, type = "text", value, onChange, placeholder, req
   );
 }
 
-function FaqItem({ q, a }) {
+function FaqItem({ q, a }: { q: string, a: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-gray-100 last:border-0">
@@ -156,9 +156,9 @@ export default function ContactPage() {
   const [topicOpen, setTopicOpen] = useState(false);
   const [msgFocused, setMsgFocused] = useState(false);
 
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement>) => setForm((f: any) => ({ ...f, [k]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
@@ -302,7 +302,8 @@ export default function ContactPage() {
                       }`}>
                       <textarea
                         id="message" rows={5}
-                        value={form.message} onChange={set("message")}
+                        value={form.message}
+                        // onChange={set("message")}
                         onFocus={() => setMsgFocused(true)} onBlur={() => setMsgFocused(false)}
                         placeholder="Bạn muốn nói gì với chúng tôi?"
                         required

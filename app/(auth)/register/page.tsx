@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Eye, EyeOff, ArrowUpRight, ArrowLeft, Check } from "lucide-react";
 
 // ── Password strength ───────────────────────────────────────────────────────
-const getStrength = (pw) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getStrength = (pw: any) => {
   if (!pw) return { score: 0, label: "", color: "" };
   let score = 0;
   if (pw.length >= 8) score++;
@@ -27,7 +28,8 @@ const getStrength = (pw) => {
 // ── Step indicator ──────────────────────────────────────────────────────────
 const STEPS = ["Tài khoản", "Cá nhân", "Hoàn tất"];
 
-function StepBar({ current }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function StepBar({ current }: { current: any }) {
   return (
     <div className="flex items-center gap-0 mb-10">
       {STEPS.map((label, i) => {
@@ -77,13 +79,13 @@ export default function RegisterPage() {
     newsletter: false,
   });
 
-  const set = (k) => (e) =>
-    setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
+  const set = (k: any) => (e: any) =>
+    setForm((f: any) => ({ ...f, [k]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
 
   const strength = getStrength(form.password);
   const passwordMatch = form.password && form.confirm && form.password === form.confirm;
 
-  const handleNext = (e) => {
+  const handleNext = (e: any) => {
     e.preventDefault();
     if (step < 2) setStep((s) => s + 1);
     else {
@@ -92,7 +94,8 @@ export default function RegisterPage() {
     }
   };
 
-  const Field = ({ id, label, type = "text", value, onChange, placeholder, extra, required }) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Field = ({ id, label, type = "text", value, onChange, placeholder, extra, required }: { id: string, label: string, type?: string, value: string, onChange: any, placeholder: string, extra?: any, required?: boolean }) => (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <label htmlFor={id} className="text-xs font-bold uppercase tracking-widest text-gray-400">

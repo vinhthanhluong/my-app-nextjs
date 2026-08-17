@@ -27,24 +27,24 @@ const INITIAL_CART = [
   },
 ];
 
-const fmt = (n) =>
+const fmt = (n: number) =>
   new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(n);
 
 // ─── Mini Cart ────────────────────────────────────────────────────────────────
-function MiniCart({ onClose }) {
+function MiniCart({ onClose }: { onClose: () => void }) {
   const [items, setItems] = useState(INITIAL_CART);
 
-  const updateQty = (id, delta) =>
+  const updateQty = (id: number, delta: number) =>
     setItems((prev) =>
       prev
         .map((item) => item.id === id ? { ...item, qty: item.qty + delta } : item)
         .filter((item) => item.qty > 0)
     );
 
-  const remove = (id) => setItems((prev) => prev.filter((item) => item.id !== id));
+  const remove = (id: number) => setItems((prev) => prev.filter((item) => item.id !== id));
 
-  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
-  const totalQty = items.reduce((s, i) => s + i.qty, 0);
+  const subtotal = items.reduce((s: number, i: { price: number; qty: number; }) => s + i.price * i.qty, 0);
+  const totalQty = items.reduce((s: number, i: { qty: number; }) => s + i.qty, 0);
 
   return (
     <div className="flex flex-col h-full">
@@ -210,7 +210,7 @@ export default function HeaderPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const cartRef = useRef(null);
+  const cartRef = useRef<HTMLDivElement | null>(null);
 
   const cartCount = INITIAL_CART.reduce((s, i) => s + i.qty, 0);
 
@@ -222,8 +222,8 @@ export default function HeaderPage() {
 
   // Close cart on outside click
   useEffect(() => {
-    const handleClick = (e) => {
-      if (cartOpen && cartRef.current && !cartRef.current.contains(e.target)) {
+    const handleClick = (e: MouseEvent) => {
+      if (cartOpen && cartRef.current && !cartRef.current.contains(e.target as Node)) {
         setCartOpen(false);
       }
     };
