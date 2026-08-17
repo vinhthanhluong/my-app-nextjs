@@ -2,108 +2,445 @@
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Search, ChevronLeft, ChevronRight } from "lucide-react";
+import type { BlogItem } from "@/interfaces/blog";
+import { formatDate } from "@/lib/utils";
 
 // ─── Mock Data ─────────────────────────────────────────────────────────────────
-const ALL_POSTS = [
+const ALL_POSTS: BlogItem[] = [
   {
-    id: 1,
-    category: "Thiết kế",
-    title: "Tại sao phong cách tối giản lại lên ngôi trong năm 2026?",
-    excerpt:
-      "Chúng ta đang sống trong thời đại của sự bão hòa thông tin. Tối giản không chỉ là một xu hướng thẩm mỹ — đó là một phản ứng có chủ đích trước sự hỗn loạn của thế giới hiện đại.",
-    date: "12 Tháng 4, 2026",
-    readTime: "5 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=800&auto=format&fit=crop",
-    featured: true,
+    "id": 240,
+    "date": "2025-11-14T15:28:59",
+    "date_gmt": "2025-11-14T06:28:59",
+    "guid": {
+      "rendered": "https://thanhlv.ju.alive-web.site/blog/p240/"
+    },
+    "modified": "2026-08-17T17:58:23",
+    "modified_gmt": "2026-08-17T08:58:23",
+    "slug": "test-test-%e7%a7%91%e5%ad%a6%e8%80%85%e5%90%8c%e3%81%98%e3%81%8f%e6%9c%a8%e6%98%9f%e3%81%ae%e8%a1%9b%e6%98%9f%e3%81%a7%e3%81%82%e3%82%8b%e3%82%ab%e3%83%aa%e3%82%b9%e3%83%88%e3%81%a8%e3%82%ac-3",
+    "status": "publish",
+    "type": "blog",
+    "link": "https://thanhlv.ju.alive-web.site/blog/p240/",
+    "title": {
+      "rendered": "444test test 科学者同じく木星の衛星であるカリストとガニメデ、そして土星の衛星エンケラドスとタイタン 4"
+    },
+    "content": {
+      "rendered": "<p>科学者たちはこうして初めて、地球以外の天体に氷殻に覆われた内部海がある証拠をつかんだ。現在では、同じく木星の衛星であるカリストとガニメデ、そして土星の衛星エンケラドスとタイタン、海科学者たちはこうして初めて、地球以外の天体に氷殻に覆われた内部海がある証拠をつかんだ。現在では、同じく木星の衛星であるカリストとガニメデ、そして土星の衛星エンケラドスとタイタン、海</p>\n<p>照明器具にファンが付属する「ファン付き照明」。<br />\nおしゃれな空間になることから人気ですが、デメリットがあることをご存知でしょうか。<br />\n実はホコリが溜まりやすい点や照明との干渉など、設置した後に後悔を抱える方も少なくないようで、採用する場合は機種の選び方や設置場所など、注意が必要な設備でもあります。</p>\n<p><strong>本記事では</strong>、<em>ファン付き照明のデメリットとともに</em>、<a href=\"https://www.google.com/\">失敗や後悔を防</a>ぐための対策についても解説します。<br />\n設置した後に感じられる効果などメリットについてもお伝えしますので、照明器具やシーリングファンについて悩んでいる方もぜひ参考にしてください。</p>\n<h2>ファン付き照明のデメリットとは？（h2）</h2>\n<p>はじめに、ファン付き照明を選んだ場合、どのようなデメリットを感じる可能性があるのか、12の注意点を紹介します。</p>\n<h3>ホコリが溜まりやすく頻繁に掃除が必要に（h3）</h3>\n<div id=\"attachment_89\" style=\"width: 2570px\" class=\"wp-caption aligncenter\"><img decoding=\"async\" aria-describedby=\"caption-attachment-89\" class=\"wp-image-89 size-full\" src=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-scaled.png\" alt=\"\" width=\"2560\" height=\"853\" srcset=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-scaled.png 2560w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-750x250.png 750w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-1024x341.png 1024w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-300x100.png 300w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-768x256.png 768w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-1536x512.png 1536w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-2048x683.png 2048w\" sizes=\"(max-width: 2560px) 100vw, 2560px\" /><p id=\"caption-attachment-89\" class=\"wp-caption-text\">ファン付き照明のデメリット：ホコリが溜まりやすい（キャプション）</p></div>\n<p>ファン付き照明で失敗・後悔を感じやすい点は、ホコリが溜まりやすく頻繁に掃除が必要になることです。</p>\n<p>夏や冬の時期に長く動作し続けるファン付き照明は、回転部分を中心にホコリをキャッチしやすい特徴を持っています。<br />\nまた、ファンと隣接する照明に対してもホコリが付着し、照明で照らされることで目立つことがあります。<br />\n頻繁に掃除が必要になることに大変さを感じる場合、失敗や後悔につながるでしょう。</p>\n<h3>サーキュレータータイプと羽根つきタイプを検討する（h3）</h3>\n<div id=\"attachment_20\" style=\"width: 540px\" class=\"wp-caption aligncenter\"><img decoding=\"async\" aria-describedby=\"caption-attachment-20\" class=\"size-full wp-image-20\" src=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03.jpg\" alt=\"\" width=\"530\" height=\"795\" srcset=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03.jpg 530w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03-500x750.jpg 500w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03-200x300.jpg 200w\" sizes=\"(max-width: 530px) 100vw, 530px\" /><p id=\"caption-attachment-20\" class=\"wp-caption-text\">ファン付き照明のデメリット対策：サーキュレータータイプを選択する（キャプション）</p></div>\n<p>ファン付き照明のデメリットを避けるためには、サーキュレータータイプのシーリングファンも検討してみましょう。<br />\n一般的にファン付き照明は羽根がむき出しになっていますが、サーキュレータータイプは枠や前面・背面にメッシュが付属していて、壁に当たったり子どもが羽根に物を当てるといった心配をせずに済みます。</p>\n<p>また、コンパクトであることから脱衣所などへの設置も可能です。</p>\n<h3>計画段階で天井の下地を設けておく（特に昇降機能をつける場合）（h3）</h3>\n<p>設置によって天井に荷重がかかること、地震が起きたとき落下することなどに不安を覚える方は、設計・施工時にしっかりした下地を作ることをおすすめします。</p>\n<p>特に昇降機能をつける場合は、昇降機自体の重量があること、昇降機構を天井に隠すため天井に余裕を持たせることなど、検討する事柄が増えますので注意が必要です。</p>\n<h2>ファン付き照明のデメリットと注意点まとめ（h2）</h2>\n<p><img decoding=\"async\" class=\"aligncenter size-full wp-image-22\" src=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04.jpg\" alt=\"\" width=\"900\" height=\"530\" srcset=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04.jpg 900w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-750x442.jpg 750w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-300x177.jpg 300w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-768x452.jpg 768w\" sizes=\"(max-width: 900px) 100vw, 900px\" /></p>\n<p>シーリングファンと照明が一体となったファン付き照明について、主にデメリットとその対策を解説しました。<br />\nゆったりと回転するファンからの送風を受けられるファン付き照明は、温熱環境を整えおしゃれな空間を作ることに効果的です。</p>\n<p>一方で以下のとおり、複数のデメリットを指摘されることもあります。</p>\n<ul>\n<li>ホコリが集まりやすく掃除が大変になる</li>\n<li>ホコリが集まりやすく掃除が大変になる</li>\n<li>ホコリが集まりやすく掃除が大変になる</li>\n</ul>\n<p>しかし、こうした課題は、それぞれ対策を取ることが可能です。</p>\n<ol>\n<li>手の届く範囲に設置、昇降機能取り付けで掃除に配慮</li>\n<li>手の届く範囲に設置、昇降機能取り付けで掃除に配慮</li>\n</ol>\n<blockquote><p>引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。</p></blockquote>\n",
+      "protected": false
+    },
+    "featured_media": 22,
+    "template": "",
+    "blogcat": [
+      13
+    ],
+    "class_list": [
+      "post-240",
+      "blog",
+      "type-blog",
+      "status-publish",
+      "has-post-thumbnail",
+      "hentry",
+      "blogcat-cate3"
+    ],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog/240",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/types/blog"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 2,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog/240/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 252,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog/240/revisions/252"
+        }
+      ],
+      "wp:featuredmedia": [
+        {
+          "embeddable": true,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/media/22"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/media?parent=240"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "blogcat",
+          "embeddable": true,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat?post=240"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "wp:featuredmedia": [
+        {
+          "id": 22,
+          "date": "2025-10-27T18:06:57",
+          "slug": "blog-detail-img04",
+          "type": "attachment",
+          "link": "https://thanhlv.ju.alive-web.site/blog/p6/blog-detail-img04/",
+          "title": {
+            "rendered": "blog-detail-img04"
+          },
+          "author": 1,
+          "featured_media": 0,
+          "acf": [],
+          "caption": {
+            "rendered": ""
+          },
+          "alt_text": "",
+          "media_type": "image",
+          "mime_type": "image/jpeg",
+          "media_details": {
+            "width": 900,
+            "height": 530,
+            "file": "2025/10/blog-detail-img04.jpg",
+            "filesize": 350624,
+            "sizes": {
+              "medium": {
+                "file": "blog-detail-img04-750x442.jpg",
+                "width": 750,
+                "height": 442,
+                "filesize": 62886,
+                "mime_type": "image/jpeg",
+                "source_url": "https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-750x442.jpg"
+              },
+              "thumbnail": {
+                "file": "blog-detail-img04-300x177.jpg",
+                "width": 300,
+                "height": 177,
+                "filesize": 16541,
+                "mime_type": "image/jpeg",
+                "source_url": "https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-300x177.jpg"
+              },
+              "medium_large": {
+                "file": "blog-detail-img04-768x452.jpg",
+                "width": 768,
+                "height": 452,
+                "filesize": 64915,
+                "mime_type": "image/jpeg",
+                "source_url": "https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-768x452.jpg"
+              },
+              "full": {
+                "file": "blog-detail-img04.jpg",
+                "width": 900,
+                "height": 530,
+                "mime_type": "image/jpeg",
+                "source_url": "https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04.jpg"
+              }
+            },
+            "image_meta": {
+              "aperture": "0",
+              "credit": "",
+              "camera": "",
+              "caption": "",
+              "created_timestamp": "0",
+              "copyright": "",
+              "focal_length": "0",
+              "iso": "0",
+              "shutter_speed": "0",
+              "title": "",
+              "orientation": "0",
+              "keywords": []
+            }
+          },
+          "source_url": "https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04.jpg",
+          "_links": {
+            "self": [
+              {
+                "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/media/22",
+                "targetHints": {
+                  "allow": [
+                    "GET"
+                  ]
+                }
+              }
+            ],
+            "collection": [
+              {
+                "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/media"
+              }
+            ],
+            "about": [
+              {
+                "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/types/attachment"
+              }
+            ],
+            "author": [
+              {
+                "embeddable": true,
+                "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/users/1"
+              }
+            ],
+            "replies": [
+              {
+                "embeddable": true,
+                "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/comments?post=22"
+              }
+            ]
+          }
+        }
+      ],
+      "wp:term": [
+        [
+          {
+            "id": 13,
+            "link": "https://thanhlv.ju.alive-web.site/blogcat/cate3/",
+            "name": "cate3",
+            "slug": "cate3",
+            "taxonomy": "blogcat",
+            "acf": [],
+            "_links": {
+              "self": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat/13",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/taxonomies/blogcat"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog?blogcat=13"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
   },
   {
-    id: 2,
-    category: "Lối sống",
-    title: "5 cách để tinh gọn không gian làm việc của bạn",
-    excerpt:
-      "Một bàn làm việc gọn gàng không chỉ trông đẹp hơn — nó thực sự giúp bạn tập trung và làm việc hiệu quả hơn. Khám phá những bước đơn giản để tạo ra môi trường làm việc lý tưởng.",
-    date: "08 Tháng 4, 2026",
-    readTime: "4 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    id: 3,
-    category: "Cửa hàng",
-    title: "Hành trình tạo ra bộ sưu tập Tiny Red đặc trưng",
-    excerpt:
-      "Từ những phác thảo đầu tiên đến sản phẩm hoàn chỉnh trên kệ — chúng tôi chia sẻ câu chuyện phía sau bộ sưu tập được yêu thích nhất của mình.",
-    date: "01 Tháng 4, 2026",
-    readTime: "7 phút đọc",
-    image:
-      "https://plus.unsplash.com/premium_photo-1669904021350-c59c580086e3?q=80&w=688&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    id: 4,
-    category: "Thiết kế",
-    title: "Màu sắc và cảm xúc: Khi đỏ trở thành ngôn ngữ thương hiệu",
-    excerpt:
-      "Màu đỏ không chỉ thu hút ánh nhìn — nó kể một câu chuyện. Tìm hiểu cách chúng tôi đã xây dựng bản sắc thương hiệu xung quanh một gam màu duy nhất.",
-    date: "25 Tháng 3, 2026",
-    readTime: "6 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    id: 5,
-    category: "Lối sống",
-    title: "Slow living: Nghệ thuật sống chậm trong thế giới nhanh",
-    excerpt:
-      "Không phải mọi thứ đều cần phải diễn ra ngay lập tức. Chúng tôi khám phá triết học sống chậm và cách nó có thể thay đổi cách bạn tiêu thụ và trân trọng đồ vật.",
-    date: "18 Tháng 3, 2026",
-    readTime: "8 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    id: 6,
-    category: "Cửa hàng",
-    title: "Đóng gói bền vững: Cam kết của chúng tôi với môi trường",
-    excerpt:
-      "Mỗi hộp, mỗi tờ giấy gói đều là một quyết định có ý thức. Khám phá hành trình của chúng tôi hướng tới bao bì thân thiện với môi trường.",
-    date: "10 Tháng 3, 2026",
-    readTime: "5 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    id: 7,
-    category: "Thiết kế",
-    title: "Typography trong thiết kế tối giản: Ít hơn là nhiều hơn",
-    excerpt:
-      "Khi loại bỏ mọi yếu tố trang trí, chữ viết trở thành nhân vật chính. Chúng tôi chia sẻ cách chọn font chữ để nói nhiều bằng ít ký tự nhất.",
-    date: "02 Tháng 3, 2026",
-    readTime: "6 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop",
-    featured: false,
-  },
-  {
-    id: 8,
-    category: "Thiết kế",
-    title: "Tesst",
-    excerpt:
-      "Khi loại bỏ mọi yếu tố trang trí, chữ viết trở thành nhân vật chính. Chúng tôi chia sẻ cách chọn font chữ để nói nhiều bằng ít ký tự nhất.",
-    date: "02 Tháng 3, 2026",
-    readTime: "6 phút đọc",
-    image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop",
-    featured: false,
+    "id": 238,
+    "date": "2025-11-14T15:28:51",
+    "date_gmt": "2025-11-14T06:28:51",
+    "guid": {
+      "rendered": "https://thanhlv.ju.alive-web.site/blog/p238/"
+    },
+    "modified": "2026-08-17T18:44:15",
+    "modified_gmt": "2026-08-17T09:44:15",
+    "slug": "test-test-%e7%a7%91%e5%ad%a6%e8%80%85%e5%90%8c%e3%81%98%e3%81%8f%e6%9c%a8%e6%98%9f%e3%81%ae%e8%a1%9b%e6%98%9f%e3%81%a7%e3%81%82%e3%82%8b%e3%82%ab%e3%83%aa%e3%82%b9%e3%83%88%e3%81%a8%e3%82%ac-2",
+    "status": "publish",
+    "type": "blog",
+    "link": "https://thanhlv.ju.alive-web.site/blog/p238/",
+    "title": {
+      "rendered": "222222test test 科学者同じく木星の衛星であるカリストとガニメデ、そして土星の衛星エンケラドスとタイタン 3"
+    },
+    "content": {
+      "rendered": "<p>科学者たちはこうして初めて、地球以外の天体に氷殻に覆われた内部海がある証拠をつかんだ。現在では、同じく木星の衛星であるカリストとガニメデ、そして土星の衛星エンケラドスとタイタン、海科学者たちはこうして初めて、地球以外の天体に氷殻に覆われた内部海がある証拠をつかんだ。現在では、同じく木星の衛星であるカリストとガニメデ、そして土星の衛星エンケラドスとタイタン、海</p>\n<p>照明器具にファンが付属する「ファン付き照明」。<br />\nおしゃれな空間になることから人気ですが、デメリットがあることをご存知でしょうか。<br />\n実はホコリが溜まりやすい点や照明との干渉など、設置した後に後悔を抱える方も少なくないようで、採用する場合は機種の選び方や設置場所など、注意が必要な設備でもあります。</p>\n<p><strong>本記事では</strong>、<em>ファン付き照明のデメリットとともに</em>、<a href=\"https://www.google.com/\">失敗や後悔を防</a>ぐための対策についても解説します。<br />\n設置した後に感じられる効果などメリットについてもお伝えしますので、照明器具やシーリングファンについて悩んでいる方もぜひ参考にしてください。</p>\n<h2>ファン付き照明のデメリットとは？（h2）</h2>\n<p>はじめに、ファン付き照明を選んだ場合、どのようなデメリットを感じる可能性があるのか、12の注意点を紹介します。</p>\n<h3>ホコリが溜まりやすく頻繁に掃除が必要に（h3）</h3>\n<div id=\"attachment_89\" style=\"width: 2570px\" class=\"wp-caption aligncenter\"><img decoding=\"async\" aria-describedby=\"caption-attachment-89\" class=\"wp-image-89 size-full\" src=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-scaled.png\" alt=\"\" width=\"2560\" height=\"853\" srcset=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-scaled.png 2560w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-750x250.png 750w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-1024x341.png 1024w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-300x100.png 300w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-768x256.png 768w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-1536x512.png 1536w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/fff-2048x683.png 2048w\" sizes=\"(max-width: 2560px) 100vw, 2560px\" /><p id=\"caption-attachment-89\" class=\"wp-caption-text\">ファン付き照明のデメリット：ホコリが溜まりやすい（キャプション）</p></div>\n<p>ファン付き照明で失敗・後悔を感じやすい点は、ホコリが溜まりやすく頻繁に掃除が必要になることです。</p>\n<p>夏や冬の時期に長く動作し続けるファン付き照明は、回転部分を中心にホコリをキャッチしやすい特徴を持っています。<br />\nまた、ファンと隣接する照明に対してもホコリが付着し、照明で照らされることで目立つことがあります。<br />\n頻繁に掃除が必要になることに大変さを感じる場合、失敗や後悔につながるでしょう。</p>\n<h3>サーキュレータータイプと羽根つきタイプを検討する（h3）</h3>\n<div id=\"attachment_20\" style=\"width: 540px\" class=\"wp-caption aligncenter\"><img decoding=\"async\" aria-describedby=\"caption-attachment-20\" class=\"size-full wp-image-20\" src=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03.jpg\" alt=\"\" width=\"530\" height=\"795\" srcset=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03.jpg 530w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03-500x750.jpg 500w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img03-200x300.jpg 200w\" sizes=\"(max-width: 530px) 100vw, 530px\" /><p id=\"caption-attachment-20\" class=\"wp-caption-text\">ファン付き照明のデメリット対策：サーキュレータータイプを選択する（キャプション）</p></div>\n<p>ファン付き照明のデメリットを避けるためには、サーキュレータータイプのシーリングファンも検討してみましょう。<br />\n一般的にファン付き照明は羽根がむき出しになっていますが、サーキュレータータイプは枠や前面・背面にメッシュが付属していて、壁に当たったり子どもが羽根に物を当てるといった心配をせずに済みます。</p>\n<p>また、コンパクトであることから脱衣所などへの設置も可能です。</p>\n<h3>計画段階で天井の下地を設けておく（特に昇降機能をつける場合）（h3）</h3>\n<p>設置によって天井に荷重がかかること、地震が起きたとき落下することなどに不安を覚える方は、設計・施工時にしっかりした下地を作ることをおすすめします。</p>\n<p>特に昇降機能をつける場合は、昇降機自体の重量があること、昇降機構を天井に隠すため天井に余裕を持たせることなど、検討する事柄が増えますので注意が必要です。</p>\n<h2>ファン付き照明のデメリットと注意点まとめ（h2）</h2>\n<p><img decoding=\"async\" class=\"aligncenter size-full wp-image-22\" src=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04.jpg\" alt=\"\" width=\"900\" height=\"530\" srcset=\"https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04.jpg 900w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-750x442.jpg 750w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-300x177.jpg 300w, https://thanhlv.ju.alive-web.site/wp/wp-content/uploads/2025/10/blog-detail-img04-768x452.jpg 768w\" sizes=\"(max-width: 900px) 100vw, 900px\" /></p>\n<p>シーリングファンと照明が一体となったファン付き照明について、主にデメリットとその対策を解説しました。<br />\nゆったりと回転するファンからの送風を受けられるファン付き照明は、温熱環境を整えおしゃれな空間を作ることに効果的です。</p>\n<p>一方で以下のとおり、複数のデメリットを指摘されることもあります。</p>\n<ul>\n<li>ホコリが集まりやすく掃除が大変になる</li>\n<li>ホコリが集まりやすく掃除が大変になる</li>\n<li>ホコリが集まりやすく掃除が大変になる</li>\n</ul>\n<p>しかし、こうした課題は、それぞれ対策を取ることが可能です。</p>\n<ol>\n<li>手の届く範囲に設置、昇降機能取り付けで掃除に配慮</li>\n<li>手の届く範囲に設置、昇降機能取り付けで掃除に配慮</li>\n</ol>\n<blockquote><p>引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。引用のテキストが入ります。</p></blockquote>\n",
+      "protected": false
+    },
+    "featured_media": 0,
+    "template": "",
+    "blogcat": [
+      8,
+      4
+    ],
+    "class_list": [
+      "post-238",
+      "blog",
+      "type-blog",
+      "status-publish",
+      "hentry",
+      "blogcat-test-cate",
+      "blogcat-cate11"
+    ],
+    "acf": [],
+    "_links": {
+      "self": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog/238",
+          "targetHints": {
+            "allow": [
+              "GET"
+            ]
+          }
+        }
+      ],
+      "collection": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog"
+        }
+      ],
+      "about": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/types/blog"
+        }
+      ],
+      "version-history": [
+        {
+          "count": 2,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog/238/revisions"
+        }
+      ],
+      "predecessor-version": [
+        {
+          "id": 253,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog/238/revisions/253"
+        }
+      ],
+      "wp:attachment": [
+        {
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/media?parent=238"
+        }
+      ],
+      "wp:term": [
+        {
+          "taxonomy": "blogcat",
+          "embeddable": true,
+          "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat?post=238"
+        }
+      ],
+      "curies": [
+        {
+          "name": "wp",
+          "href": "https://api.w.org/{rel}",
+          "templated": true
+        }
+      ]
+    },
+    "_embedded": {
+      "wp:term": [
+        [
+          {
+            "id": 8,
+            "link": "https://thanhlv.ju.alive-web.site/blogcat/test-cate/",
+            "name": "test cate",
+            "slug": "test-cate",
+            "taxonomy": "blogcat",
+            "acf": [],
+            "_links": {
+              "self": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat/8",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/taxonomies/blogcat"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog?blogcat=8"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          },
+          {
+            "id": 4,
+            "link": "https://thanhlv.ju.alive-web.site/blogcat/cate11/",
+            "name": "小林 大将11",
+            "slug": "cate11",
+            "taxonomy": "blogcat",
+            "acf": [],
+            "_links": {
+              "self": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat/4",
+                  "targetHints": {
+                    "allow": [
+                      "GET"
+                    ]
+                  }
+                }
+              ],
+              "collection": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blogcat"
+                }
+              ],
+              "about": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/taxonomies/blogcat"
+                }
+              ],
+              "wp:post_type": [
+                {
+                  "href": "https://thanhlv.ju.alive-web.site/wp-json/wp/v2/blog?blogcat=4"
+                }
+              ],
+              "curies": [
+                {
+                  "name": "wp",
+                  "href": "https://api.w.org/{rel}",
+                  "templated": true
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
   },
 ];
 
-// const CATEGORIES = ["Tất cả", "Thiết kế", "Lối sống", "Cửa hàng"];
 const POSTS_PER_PAGE = 6;
 
 // ─── Subcomponents ──────────────────────────────────────────────────────────
@@ -159,13 +496,14 @@ function FeaturedPost({ post }) {
   );
 }
 
-function PostCard({ post }) {
+function PostCard({ post }: { post: BlogItem }) {
+  const image = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url || "https://thanhlv.ju.alive-web.site/wp/wp-content/themes/wp-templ/assets/img/blog/blog-eyecatch.jpg";
   return (
     <article className="group cursor-pointer">
       <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100 mb-6">
         <img
-          src={post.image}
-          alt={post.title}
+          src={image}
+          alt={post?.title.rendered}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
@@ -174,14 +512,14 @@ function PostCard({ post }) {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold text-red-500 uppercase tracking-wider">
-            {post.category}
+            {post?._embedded && post._embedded['wp:term'] && post._embedded['wp:term'][0] && post._embedded['wp:term'][0][0] && post._embedded['wp:term'][0][0].name}
           </span>
-          <span className="text-xs text-gray-400 font-medium">{post.date}</span>
+          <span className="text-xs text-gray-400 font-medium">{formatDate(post?.date)}</span>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 leading-snug group-hover:text-red-500 transition-colors duration-300">
-          {post.title}
+        <h3 className="line-clamp-2 text-xl font-bold text-gray-900 leading-snug group-hover:text-red-500 transition-colors duration-300">
+          {post?.title.rendered}
         </h3>
-        <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{post.excerpt}</p>
+        <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{post?.content.rendered}</p>
         <div className="pt-2 flex items-center justify-between">
           <Button
             variant="link"
@@ -190,7 +528,7 @@ function PostCard({ post }) {
             Đọc tiếp{" "}
             <ArrowUpRight className="ml-1 w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Button>
-          <span className="text-xs text-gray-400">{post.readTime}</span>
+          {/* <span className="text-xs text-gray-400">{post.modified}</span> */}
         </div>
       </div>
     </article>
@@ -257,6 +595,29 @@ export default function BlogArchivePage() {
 
     handlefetchCategoryBlog();
   }, []);
+
+  // API BLOG ITEM
+  const [dataBlog, setDataBlog] = useState([]);
+  useEffect(() => {
+    const handlefetchBlog = async () => {
+      try {
+        const resBlogcat = await fetch("/api/blog");
+        const text = await resBlogcat.text();
+
+        if (!resBlogcat.ok) {
+          throw new Error(`API lỗi ${resBlogcat.status}: ${text}`);
+        }
+
+        const data = JSON.parse(text);
+        setDataBlog(data);
+      } catch (error) {
+        console.error("Blog error:", error);
+      }
+    };
+
+    handlefetchBlog();
+  }, []);
+
 
   return (
     <div className="bg-white min-h-screen">
@@ -331,12 +692,10 @@ export default function BlogArchivePage() {
         {activeCategory === "all" && searchQuery === "" && featured && (
           <FeaturedPost post={featured} />
         )}
-        {/* <FeaturedPost post={featured} /> */}
-
         {/* Grid */}
-        {ALL_POSTS.length > 0 ? (
+        {dataBlog.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-8 gap-12">
-            {ALL_POSTS.map((post) => (
+            {dataBlog.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
           </div>
