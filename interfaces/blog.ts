@@ -15,7 +15,7 @@ export interface BlogItem {
   template: string;
   blogcat: number[];
   class_list: unknown[];
-  acf: unknown[];
+  acf?: Acf;
   _links?: BlogItemLinks;
   _embedded?: Embedded;
 }
@@ -51,6 +51,9 @@ export interface Self {
 
 export interface WpPostType {
   href: string;
+}
+export interface Acf {
+  featured_post: string;
 }
 
 //////////////////////// _embedded
@@ -199,4 +202,14 @@ export interface LinksWpTerm {
   taxonomy: string;
   embeddable: boolean;
   href: string;
+}
+export interface BlogApiResponse {
+  data: BlogItem[];
+  pagination: BlogPagination;
+}
+export interface BlogPagination {
+  page?: number;
+  perPage?: number;
+  total?: number;
+  totalPages?: number;
 }

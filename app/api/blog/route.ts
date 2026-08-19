@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const username = process.env.WORDPRESS_USERNAME;
     const password = process.env.WORDPRESS_PASSWORD;
@@ -9,8 +9,15 @@ export async function GET() {
       `${username}:${password}`
     ).toString("base64");
 
+    // Lấy page từ query của Next.js
+    const { searchParams } = new URL(request.url);
+    const page = searchParams.get("page") || "1";
+    const perPage = searchParams.get("per_page") || "10";
+
     const res = await fetch(
-      `${process.env.WORDPRESS_API_URL}/blog?_embed`,
+      // `${process.env.WORDPRESS_API_URL}/blog?_embed&per_page=10`,
+      // `${process.env.WORDPRESS_API_URL}/blog?_embed`,
+      `${process.env.WORDPRESS_API_URL}/blog?_embed&page=${page}&per_page=${perPage}`,
       {
         cache: "no-store",
         headers: {
@@ -34,7 +41,21 @@ export async function GET() {
 
     const data = await res.json();
 
-    return NextResponse.json(data);
+    // WordPress trả thông tin pagination trong header
+    const total = Number(res.headers.get("X-WP-Total") || 0);
+    const totalPages = Number(
+      res.headers.get("X-WP-TotalPages") || 0
+    );
+
+    return NextResponse.json({
+      data,
+      pagination: {
+        page: Number(page),
+        perPage: Number(perPage),
+        total,
+        totalPages,
+      },
+    });
   } catch (error) {
     console.error(error);
 
